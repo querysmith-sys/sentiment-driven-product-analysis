@@ -44,7 +44,7 @@ if uploaded_file and run_analysis:
     # risk-identification
     risk_identified_dataset = risk_calc_summary(product_level_agg_dataset) 
     resulted_dataset = risk_identified_dataset.reset_index()
-     st.success("Analysis completed")
+    st.success("Analysis completed")
     # visulaization
     sentiment_distribution_chart(sentiment_classified_data)
     top_risky_products_chart(resulted_dataset,product_column)
