@@ -4,9 +4,13 @@
 import pandas as pd # type: ignore
 
 
-def load_dataset():
-    file = pd.read_csv('service/upload_service/Dataset-SA.csv')
-    return file
-file_dataset = pd.DataFrame(load_dataset())
+def process_dataset(dataset):
+
+    dataset = pd.read_csv(dataset)
+    newDataset = pd.DataFrame(dataset)
+    return dataset
+
+
+# file_dataset = upload_service()
 
 

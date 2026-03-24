@@ -1,27 +1,28 @@
 # type:ignore
 import re
 from nltk.corpus import stopwords
-from service.upload_service import file_dataset as tf
 
+def text_process(processed_dataset, review_column):
+    
+    # remove rows where review is missing
+    dataset = processed_dataset.dropna(subset=[review_column]).copy()
 
+    stop_words = set(stopwords.words("english"))
+    # print(stop_words)
 
-dataset = tf.file_dataset
-# print(dataset.columns)
+    stop_words.discard("not")
+    stop_words.discard("no")
 
-# replace missing falue with null
-dataset = dataset.dropna(subset=["Review"])
-stop_words = set(stopwords.words("english"))
+    def clean_text(text):
+        text = str(text).lower()
+        text = re.sub(r"[^\w\s]", " ", text).strip()
 
-stop_words.remove("not")
-stop_words.remove("no")
+        words = text.split()
+        filtered_words = [word for word in words if word not in stop_words]
 
-def clean_text(text):
-    text = str(text).lower()
-    text = re.sub(r"[^\w\s]", "", text)
-    words = text.split()
-    word = [word for word in words if word not in stop_words]
-    return " ".join(word)
+        return " ".join(filtered_words)
 
-# print(clean_text("The battery is no bad and the phone is slow!"))
-dataset["cleaned_review"] = dataset["Review"].apply(clean_text)
-# print(dataset["cleaned_review"].head())
+    dataset["cleaned_review"] = dataset[review_column].apply(clean_text)
+
+    return dataset
+    
