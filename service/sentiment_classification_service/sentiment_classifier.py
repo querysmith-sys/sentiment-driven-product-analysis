@@ -2,6 +2,14 @@
 from nltk.sentiment import SentimentIntensityAnalyzer # type: ignore
 # print(tp.clean_text("phone not good!"))
 
+
+
+# ensure lexicon exists
+try:
+    nltk.data.find('sentiment/vader_lexicon')
+except LookupError:
+    nltk.download('vader_lexicon')
+    
 sia = SentimentIntensityAnalyzer()
 # print(sia)
 
