@@ -1,11 +1,12 @@
 # type:ignore
 import re
+import nltk
 from nltk.corpus import stopwords
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
     nltk.download('stopwords')
-    
+
 def text_process(processed_dataset, review_column):
     
     # remove rows where review is missing

@@ -1,4 +1,5 @@
 # from service.text_processing_service import text_processing as tp
+import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer # type: ignore
 # print(tp.clean_text("phone not good!"))
 
@@ -9,7 +10,7 @@ try:
     nltk.data.find('sentiment/vader_lexicon')
 except LookupError:
     nltk.download('vader_lexicon')
-    
+
 sia = SentimentIntensityAnalyzer()
 # print(sia)
 
