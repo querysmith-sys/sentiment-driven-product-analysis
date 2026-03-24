@@ -6,6 +6,21 @@ from service.sentiment_classification_service.sentiment_classifier import senti_
 from service.product_level_sentiment_aggregation_service.product_level_aggregation import product_based_senti_summary
 from service.product_risk_identification_service.risk_calculation import risk_calc_summary
 from service.visualization_service.visual import sentiment_distribution_chart, top_risky_products_chart
+
+
+import nltk
+
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords')
+
+try:
+    nltk.data.find('sentiment/vader_lexicon')
+except LookupError:
+    nltk.download('vader_lexicon')
+
+
 st.title("Product Review Sentiment Analyzer")
 
 uploaded_file = st.file_uploader("Upload CSV")
